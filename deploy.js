@@ -8,7 +8,7 @@ const path = require('path');
 const BASE = path.resolve(__dirname);
 
 // Site URLs
-const GITHUB_PAGES_URL = 'https://jayjane120422-dotcom.github.io/deeply-rooted-hair-essentials/';
+const GITHUB_PAGES_URL = 'https://lightandsalt413.github.io/deeplyrooted/';
 const NETLIFY_URL = 'https://deeplyrooted.netlify.app/'; // (paused — Netlify credit limit reached)
 
 function run(cmd) {
