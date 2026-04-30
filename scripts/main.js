@@ -291,13 +291,36 @@ function initMisconceptionAccordion() {
 
 /* ---- Form Validation ---- */
 function initForms() {
-  // Contact Form
+  // Contact Form — submit to Formspree via fetch
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       if (validateForm(contactForm)) {
-        showFormSuccess(contactForm, 'contact-success');
+        const btn = contactForm.querySelector('button[type="submit"]');
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = 'Sending...';
+        }
+        
+        const formData = new FormData(contactForm);
+        fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+          if (response.ok) {
+            showFormSuccess(contactForm, 'contact-success');
+          } else {
+            alert('Something went wrong. Please try again.');
+            if (btn) { btn.disabled = false; btn.textContent = 'Send Message →'; }
+          }
+        })
+        .catch(() => {
+          alert('Network error. Please check your connection and try again.');
+          if (btn) { btn.disabled = false; btn.textContent = 'Send Message →'; }
+        });
       }
     });
   }
