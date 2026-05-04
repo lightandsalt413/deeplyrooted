@@ -4,236 +4,88 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shop — Deeply Rooted Hair Essentials</title>
-  <meta name="description" content="Shop professional Hair Botox treatments by Deeply Rooted. Cynty, Michelle, and Scalp Renewal Treatment.">
-
+  <meta name="description" content="Shop professional Hair Botox treatments by Deeply Rooted.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="styles/main.css?v=20260504b">
-
+  <link rel="stylesheet" href="styles/main.css?v=20260504c">
   <style>
-    /* ═══════════════════════════════
-       SHOP PAGE — Clean Minimal
-    ═══════════════════════════════ */
+    .nav-logo-img{max-height:32px!important}
 
-    /* Hide nav logo image on this page to prevent overlap */
-    .nav-logo-img { max-height: 32px !important; }
+    /* ═══ HERO ═══ */
+    .sh{position:relative;padding:12rem 2rem 6rem;text-align:center;overflow:hidden;background:#1a1a14}
+    .sh::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(197,165,90,.2) 0%,transparent 60%)}
+    .sh-particles{position:absolute;inset:0;overflow:hidden}
+    .sh-p{position:absolute;width:3px;height:3px;background:rgba(197,165,90,.6);border-radius:50%;animation:shFloat 8s infinite ease-in-out}
+    @keyframes shFloat{0%,100%{transform:translateY(0) scale(1);opacity:.3}50%{transform:translateY(-120px) scale(1.5);opacity:.8}}
+    .sh h1{font-family:var(--font-accent,'Cormorant Garamond',serif);font-size:clamp(2.5rem,6vw,4.5rem);font-weight:300;color:#fff;margin:0 0 .5rem;position:relative;z-index:1}
+    .sh h1 em{color:#c5a55a;font-style:italic;background:linear-gradient(90deg,#c5a55a,#e8d5a0,#c5a55a);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shGold 3s linear infinite}
+    @keyframes shGold{0%{background-position:0%}100%{background-position:200%}}
+    .sh p{color:rgba(255,255,255,.6);font-size:1rem;position:relative;z-index:1;max-width:450px;margin:0 auto 2rem}
+    .sh-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,#c5a55a,transparent);margin:0 auto;position:relative;z-index:1}
 
-    /* ── Hero ── */
-    .shop-hero {
-      padding: 11rem 2rem 4rem;
-      text-align: center;
-      background: var(--color-cream, #faf7f2);
-      border-bottom: 1px solid rgba(197,165,90,0.1);
-    }
+    /* ═══ FEATURED ═══ */
+    .sf{padding:5rem 2rem;background:linear-gradient(180deg,#faf7f2 0%,#f0ebe1 100%)}
+    .sf-label{text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#c5a55a;margin-bottom:.5rem}
+    .sf h2{text-align:center;font-family:var(--font-accent,'Cormorant Garamond',serif);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:400;color:#2c2c1e;margin:0 0 3rem}
 
-    .shop-hero h1 {
-      font-family: var(--font-accent, 'Cormorant Garamond', serif);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 400;
-      color: var(--color-text, #2c2c1e);
-      margin: 0 0 0.5rem;
-    }
+    /* ═══ GRID ═══ */
+    .sg{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1100px;margin:0 auto}
 
-    .shop-hero h1 em {
-      color: var(--color-gold, #c5a55a);
-      font-style: italic;
-    }
-
-    .shop-hero p {
-      font-size: 0.95rem;
-      color: var(--color-text-muted, #8a7e6b);
-      max-width: 420px;
-      margin: 0 auto;
-    }
-
-    /* ── Product Grid ── */
-    .shop-section {
-      padding: 4rem 0 5rem;
-      background: var(--color-cream, #faf7f2);
-    }
-
-    .shop-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    /* ── Product Card ── */
-    .shop-card {
-      background: #fff;
-      border-radius: 16px;
-      overflow: hidden;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      border: 1px solid rgba(0,0,0,0.04);
-    }
-
-    .shop-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(44,44,30,0.08);
-    }
+    /* ═══ CARD ═══ */
+    .sc{position:relative;background:#fff;border-radius:20px;overflow:hidden;transition:all .4s cubic-bezier(.25,.46,.45,.94);cursor:pointer}
+    .sc::before{content:'';position:absolute;inset:-2px;border-radius:22px;background:linear-gradient(135deg,transparent 30%,rgba(197,165,90,.3) 50%,transparent 70%);background-size:300% 300%;opacity:0;transition:opacity .4s;z-index:-1;animation:scBorder 4s linear infinite}
+    @keyframes scBorder{0%{background-position:0% 0%}100%{background-position:300% 300%}}
+    .sc:hover::before{opacity:1}
+    .sc:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 30px 60px rgba(44,44,30,.12),0 0 40px rgba(197,165,90,.08)}
 
     /* Image */
-    .shop-card-img {
-      position: relative;
-      aspect-ratio: 1;
-      background: #f5f1ea;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      overflow: hidden;
-    }
+    .sc-img{position:relative;aspect-ratio:.85;background:linear-gradient(145deg,#f8f4ec,#ede7db);display:flex;align-items:center;justify-content:center;padding:2rem;overflow:hidden}
+    .sc-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(255,255,255,.8));pointer-events:none}
+    .sc-img img{max-height:90%;max-width:85%;object-fit:contain;filter:drop-shadow(0 8px 20px rgba(0,0,0,.1));transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
+    .sc:hover .sc-img img{transform:scale(1.08) rotate(-1deg)}
 
-    .shop-card-img img {
-      max-height: 100%;
-      max-width: 100%;
-      object-fit: contain;
-      transition: transform 0.4s ease;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.06));
-    }
+    /* Glow ring on hover */
+    .sc-glow{position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(197,165,90,.15),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%) scale(0);transition:transform .5s ease;pointer-events:none}
+    .sc:hover .sc-glow{transform:translate(-50%,-50%) scale(1.5)}
 
-    .shop-card:hover .shop-card-img img {
-      transform: scale(1.06);
-    }
+    /* Sale tag */
+    .sc-tag{position:absolute;top:1rem;left:1rem;background:linear-gradient(135deg,#c5a55a,#d4b76a);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .8rem;border-radius:50px;z-index:2;box-shadow:0 4px 12px rgba(197,165,90,.3)}
 
-    .shop-sale-tag {
-      position: absolute;
-      top: 0.8rem;
-      left: 0.8rem;
-      background: var(--color-gold, #c5a55a);
-      color: #fff;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.7rem;
-      border-radius: 4px;
-    }
-
-    /* Info */
-    .shop-card-body {
-      padding: 1.2rem 1.4rem 1.6rem;
-    }
-
-    .shop-card-body h3 {
-      font-family: var(--font-accent, 'Cormorant Garamond', serif);
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: var(--color-text, #2c2c1e);
-      margin: 0 0 0.3rem;
-    }
-
-    .shop-card-body .shop-desc {
-      font-size: 0.8rem;
-      color: var(--color-text-muted, #8a7e6b);
-      line-height: 1.5;
-      margin: 0 0 0.8rem;
-    }
+    /* Body */
+    .sc-body{padding:1.5rem 1.8rem 2rem}
+    .sc-body h3{font-family:var(--font-accent,'Cormorant Garamond',serif);font-size:1.35rem;font-weight:500;color:#2c2c1e;margin:0 0 .4rem}
+    .sc-desc{font-size:.82rem;color:#8a7e6b;line-height:1.6;margin:0 0 1rem}
 
     /* Price */
-    .shop-price {
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .shop-price strong {
-      font-family: var(--font-accent, 'Cormorant Garamond', serif);
-      font-size: 1.4rem;
-      color: var(--color-text, #2c2c1e);
-    }
-
-    .shop-price del {
-      font-size: 0.85rem;
-      color: #bbb;
-    }
+    .sc-price{display:flex;align-items:baseline;gap:.5rem;margin-bottom:1.2rem}
+    .sc-price strong{font-family:var(--font-accent,'Cormorant Garamond',serif);font-size:1.5rem;color:#2c2c1e}
+    .sc-price del{font-size:.85rem;color:#ccc}
+    .sc-save{font-size:.65rem;font-weight:700;color:#fff;background:#c5a55a;padding:.2rem .5rem;border-radius:4px}
 
     /* Button */
-    .shop-buy {
-      display: block;
-      width: 100%;
-      padding: 0.75rem;
-      background: var(--color-text, #2c2c1e);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-family: var(--font-body, 'Outfit', sans-serif);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+    .sc-btn{display:block;width:100%;padding:.85rem;border:none;border-radius:10px;font-family:var(--font-body,'Outfit',sans-serif);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-align:center;text-decoration:none;color:#fff;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(135deg,#2c2c1e,#3d3927);transition:all .3s}
+    .sc-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(197,165,90,.3),transparent);transition:left .6s}
+    .sc-btn:hover::before{left:100%}
+    .sc-btn:hover{background:linear-gradient(135deg,#c5a55a,#d4b76a);box-shadow:0 8px 25px rgba(197,165,90,.3)}
 
-    .shop-buy:hover {
-      background: var(--color-gold, #c5a55a);
-    }
+    /* ═══ QUOTE ═══ */
+    .sq{text-align:center;padding:4rem 2rem;background:#1a1a14;position:relative;overflow:hidden}
+    .sq::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(197,165,90,.08),transparent 60%)}
+    .sq blockquote{font-family:var(--font-accent,'Cormorant Garamond',serif);font-size:clamp(1.1rem,2.5vw,1.6rem);font-style:italic;font-weight:300;color:rgba(255,255,255,.8);max-width:600px;margin:0 auto;line-height:1.8;position:relative;z-index:1}
+    .sq cite{display:block;margin-top:1rem;font-size:.75rem;font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:#c5a55a}
 
-    /* ── Scripture ── */
-    .shop-quote {
-      text-align: center;
-      padding: 3rem 2rem 4rem;
-      background: var(--color-cream, #faf7f2);
-    }
-
-    .shop-quote blockquote {
-      font-family: var(--font-accent, 'Cormorant Garamond', serif);
-      font-size: 1.3rem;
-      font-style: italic;
-      font-weight: 300;
-      color: var(--color-text, #2c2c1e);
-      max-width: 550px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
-
-    .shop-quote cite {
-      display: block;
-      margin-top: 0.8rem;
-      font-size: 0.75rem;
-      font-style: normal;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--color-gold, #c5a55a);
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-      .shop-hero { padding: 8rem 1.5rem 3rem; }
-      .shop-grid { grid-template-columns: 1fr; max-width: 400px; }
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .shop-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    @media(max-width:768px){.sh{padding:9rem 1.5rem 4rem}.sg{grid-template-columns:1fr;max-width:400px}.sf{padding:3rem 1rem}}
+    @media(min-width:769px) and (max-width:1024px){.sg{grid-template-columns:repeat(2,1fr)}}
   </style>
-
-  <noscript>
-    <style>
-      .reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate, .reveal-blur {
-        opacity: 1 !important; transform: none !important;
-        filter: none !important; animation: none !important;
-      }
-    </style>
-  </noscript>
 </head>
 <body>
-
   <div class="scroll-progress" id="scroll-progress"></div>
 
-  <!-- Navigation -->
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="index.html" class="nav-logo">
         <div class="nav-logo-mark">
-          <img src="assets/images/logo.png" alt="Deeply Rooted Logo" class="nav-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <img src="assets/images/logo.png" alt="Deeply Rooted Logo" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="nav-logo-fallback" style="display:none">RD</div>
         </div>
         <span class="nav-logo-text">Deeply <em>Rooted</em></span>
@@ -245,9 +97,7 @@
         <a href="contact.html">Contact</a>
         <a href="shop.html" class="nav-cta active">Shop Now</a>
       </div>
-      <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
-        <span></span><span></span><span></span>
-      </div>
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu"><span></span><span></span><span></span></div>
     </div>
   </nav>
 
@@ -257,107 +107,97 @@
     <a href="hair-botox-101.html">Hair Botox 101</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
-    <a href="shop.html" class="btn btn-primary" style="margin-top:1rem;">Shop Now</a>
+    <a href="shop.html" class="btn btn-primary" style="margin-top:1rem">Shop Now</a>
   </div>
 
-  <!-- Hero -->
-  <section class="shop-hero">
-    <h1>Our <em>Products</em></h1>
-    <p>Salon-grade Hair Botox treatments. Rooted in faith, designed for results.</p>
+  <!-- HERO -->
+  <section class="sh">
+    <div class="sh-particles" id="sh-particles"></div>
+    <h1>The <em>Collection</em></h1>
+    <p>Salon-grade Hair Botox treatments. Formulated with care, rooted in faith.</p>
+    <div class="sh-line"></div>
   </section>
 
-  <!-- Products -->
-  <section class="shop-section">
-    <div class="shop-grid">
+  <!-- PRODUCTS -->
+  <section class="sf">
+    <p class="sf-label">✦ Shop Our Treatments ✦</p>
+    <h2>Professional Hair Botox</h2>
 
+    <div class="sg">
       <!-- Cynty -->
-      <div class="shop-card">
-        <div class="shop-card-img">
-          <span class="shop-sale-tag">Sale</span>
+      <div class="sc">
+        <div class="sc-img">
+          <span class="sc-tag">Sale</span>
+          <div class="sc-glow"></div>
           <img src="assets/images/product-cynty-raw.png" alt="Hair Botox Cynty">
         </div>
-        <div class="shop-card-body">
+        <div class="sc-body">
           <h3>Hair Botox "Cynty"</h3>
-          <p class="shop-desc">Bestselling formula — curl enhancing, anti-frizz, lasts up to 3 months. 1000ml.</p>
-          <div class="shop-price">
-            <strong>$50.00</strong>
-            <del>$75.00</del>
+          <p class="sc-desc">Bestselling formula — curl enhancing, anti-frizz. Lasts up to 3 months. 1000ml.</p>
+          <div class="sc-price">
+            <strong>$50.00</strong><del>$75.00</del><span class="sc-save">-33%</span>
           </div>
-          <a href="https://hair-botox-deeply-rooted.myshopify.com/products/hair-botox-cynty" target="_blank" class="shop-buy">Buy Now</a>
+          <a href="https://hair-botox-deeply-rooted.myshopify.com/products/hair-botox-cynty" target="_blank" class="sc-btn">Shop Now →</a>
         </div>
       </div>
 
       <!-- Michelle -->
-      <div class="shop-card">
-        <div class="shop-card-img">
-          <span class="shop-sale-tag">Sale</span>
+      <div class="sc">
+        <div class="sc-img">
+          <span class="sc-tag">Sale</span>
+          <div class="sc-glow"></div>
           <img src="assets/images/product-michelle-raw.png" alt="Hair Botox Michelle">
         </div>
-        <div class="shop-card-body">
+        <div class="sc-body">
           <h3>Hair Botox "Michelle"</h3>
-          <p class="shop-desc">Maximum strength — deep repair, 60% straighter hair, lasts up to 5 months. 1000ml.</p>
-          <div class="shop-price">
-            <strong>$50.00</strong>
-            <del>$75.00</del>
+          <p class="sc-desc">Maximum strength — deep repair, 60% straighter hair. Lasts up to 5 months. 1000ml.</p>
+          <div class="sc-price">
+            <strong>$50.00</strong><del>$75.00</del><span class="sc-save">-33%</span>
           </div>
-          <a href="https://hair-botox-deeply-rooted.myshopify.com/products/untitled-apr2_02-59" target="_blank" class="shop-buy">Buy Now</a>
+          <a href="https://hair-botox-deeply-rooted.myshopify.com/products/untitled-apr2_02-59" target="_blank" class="sc-btn">Shop Now →</a>
         </div>
       </div>
 
-      <!-- Scalp Treatment -->
-      <div class="shop-card">
-        <div class="shop-card-img">
+      <!-- Scalp -->
+      <div class="sc">
+        <div class="sc-img">
+          <div class="sc-glow"></div>
           <img src="assets/images/product-scalp-treatment.png" alt="Scalp Renewal Treatment">
         </div>
-        <div class="shop-card-body">
+        <div class="sc-body">
           <h3>Scalp Renewal Treatment</h3>
-          <p class="shop-desc">Promotes hair growth, strengthens roots, detoxifies scalp. 4 oz (118 mL).</p>
-          <div class="shop-price">
-            <strong>$35.00</strong>
-          </div>
-          <a href="https://hair-botox-deeply-rooted.myshopify.com/products/deeply-rooted-scalp-treatment" target="_blank" class="shop-buy">Buy Now</a>
+          <p class="sc-desc">Promotes hair growth, strengthens roots, detoxifies scalp. 4 oz (118 mL).</p>
+          <div class="sc-price"><strong>$35.00</strong></div>
+          <a href="https://hair-botox-deeply-rooted.myshopify.com/products/deeply-rooted-scalp-treatment" target="_blank" class="sc-btn">Shop Now →</a>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- Quote -->
-  <section class="shop-quote">
-    <blockquote>
-      "They will be like a tree planted by the water that sends out its roots by the stream."
-      <cite>— Jeremiah 17:8 🌿</cite>
-    </blockquote>
+  <!-- QUOTE -->
+  <section class="sq">
+    <blockquote>"They will be like a tree planted by the water that sends out its roots by the stream."<cite>— Jeremiah 17:8 🌿</cite></blockquote>
   </section>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer class="footer" id="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="index.html" class="nav-logo">Deeply <span>Rooted</span></a>
           <p>Professional Hair Botox treatments rooted in faith, formulated with care.</p>
-          <div class="footer-social" style="margin-top:1rem;">
+          <div class="footer-social" style="margin-top:1rem">
             <a href="https://www.facebook.com/people/Deeply-Rooted-Hair-Essentials-Merchandise/61566217615189/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="18" fill="#1877F2"/><path d="M25 18.09h-2.86v8.71H19V18.09h-2.05v-3h2.05v-1.86c0-2.04 1.2-3.15 3.05-3.15.88 0 1.8.16 1.8.16v2h-1.02c-1 0-1.31.62-1.31 1.26v1.59H25l-.55 3z" fill="#fff"/></svg></a>
             <a href="https://www.instagram.com/deeplyrootedtm/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 36 36" fill="none"><defs><radialGradient id="igf3" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect width="36" height="36" rx="8" fill="url(#igf3)"/><rect x="8" y="8" width="20" height="20" rx="6" stroke="#fff" stroke-width="2" fill="none"/><circle cx="18" cy="18" r="5" stroke="#fff" stroke-width="2" fill="none"/><circle cx="24.5" cy="11.5" r="1.5" fill="#fff"/></svg></a>
           </div>
         </div>
         <div>
           <h4>Quick Links</h4>
-          <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="hair-botox-101.html">Hair Botox 101</a>
-            <a href="about.html">About Us</a>
-            <a href="contact.html">Contact</a>
-          </div>
+          <div class="footer-links"><a href="index.html">Home</a><a href="hair-botox-101.html">Hair Botox 101</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></div>
         </div>
         <div>
           <h4>Products</h4>
-          <div class="footer-links">
-            <a href="https://hair-botox-deeply-rooted.myshopify.com/products/hair-botox-cynty" target="_blank">Cynty</a>
-            <a href="https://hair-botox-deeply-rooted.myshopify.com/products/untitled-apr2_02-59" target="_blank">Michelle</a>
-            <a href="https://hair-botox-deeply-rooted.myshopify.com/products/deeply-rooted-scalp-treatment" target="_blank">Scalp Treatment</a>
-          </div>
+          <div class="footer-links"><a href="https://hair-botox-deeply-rooted.myshopify.com/products/hair-botox-cynty" target="_blank">Cynty</a><a href="https://hair-botox-deeply-rooted.myshopify.com/products/untitled-apr2_02-59" target="_blank">Michelle</a><a href="https://hair-botox-deeply-rooted.myshopify.com/products/deeply-rooted-scalp-treatment" target="_blank">Scalp Treatment</a></div>
         </div>
         <div>
           <h4>Contact Us</h4>
@@ -376,13 +216,23 @@
   </footer>
 
   <button class="back-to-top" id="back-to-top" aria-label="Back to top">
-    <svg class="back-to-top-ring" viewBox="0 0 36 36">
-      <circle class="ring-bg" cx="18" cy="18" r="16" fill="none" stroke="rgba(197,165,90,0.2)" stroke-width="2"/>
-      <circle class="ring-progress" cx="18" cy="18" r="16" fill="none" stroke="var(--color-gold)" stroke-width="2" stroke-dasharray="100.53" stroke-dashoffset="100.53" stroke-linecap="round"/>
-    </svg>
+    <svg class="back-to-top-ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="16" fill="none" stroke="rgba(197,165,90,0.2)" stroke-width="2"/><circle class="ring-progress" cx="18" cy="18" r="16" fill="none" stroke="var(--color-gold)" stroke-width="2" stroke-dasharray="100.53" stroke-dashoffset="100.53" stroke-linecap="round"/></svg>
     <span class="back-to-top-arrow">↑</span>
   </button>
 
-  <script src="scripts/main.js?v=20260504b"></script>
+  <script src="scripts/main.js?v=20260504c"></script>
+  <script>
+    // Particles
+    (function(){
+      var c=document.getElementById('sh-particles');if(!c)return;
+      for(var i=0;i<30;i++){var p=document.createElement('div');p.className='sh-p';
+      p.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;animation-delay:'+Math.random()*8+'s;animation-duration:'+(Math.random()*6+6)+'s;width:'+(Math.random()*3+2)+'px;height:'+(Math.random()*3+2)+'px;';
+      c.appendChild(p);}
+    })();
+    // Card entrance animation
+    var cards=document.querySelectorAll('.sc');
+    var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);}});},{threshold:.2});
+    cards.forEach(function(c,i){c.style.opacity='0';c.style.transform='translateY(40px)';c.style.transition='all 0.6s cubic-bezier(0.25,0.46,0.45,0.94) '+(i*0.15)+'s';obs.observe(c);});
+  </script>
 </body>
 </html>
