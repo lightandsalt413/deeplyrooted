@@ -143,6 +143,233 @@ p { margin-bottom: var(--space-md); color: var(--color-gray-700); }
 }
 .btn-dark:hover { background: var(--color-black); transform: translateY(-2px); }
 
+/* ============================================
+   HOVER EFFECTS — Glow · Scale · Rotate & More
+   ============================================ */
+
+/* ---- Glow Effects ---- */
+.hover-glow-gold {
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+.hover-glow-gold:hover {
+  box-shadow: 0 0 20px rgba(197,165,90,0.45),
+              0 0 60px rgba(197,165,90,0.2),
+              inset 0 0 12px rgba(197,165,90,0.08);
+  transform: translateY(-2px);
+}
+
+.hover-glow-sage {
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+.hover-glow-sage:hover {
+  box-shadow: 0 0 18px rgba(122,139,111,0.4),
+              0 0 50px rgba(122,139,111,0.15),
+              inset 0 0 10px rgba(122,139,111,0.06);
+  transform: translateY(-2px);
+}
+
+.hover-glow-white {
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+.hover-glow-white:hover {
+  box-shadow: 0 0 20px rgba(255,255,255,0.35),
+              0 0 50px rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+}
+
+/* Soft halo glow — spreads wider, more ambient */
+.hover-glow-halo {
+  transition: box-shadow 0.4s ease, transform var(--transition-base);
+}
+.hover-glow-halo:hover {
+  box-shadow: 0 4px 24px rgba(197,165,90,0.25),
+              0 8px 80px rgba(197,165,90,0.12);
+  transform: translateY(-3px);
+}
+
+/* ---- Scale Effects ---- */
+.hover-scale {
+  transition: transform var(--transition-base);
+}
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-scale-subtle {
+  transition: transform var(--transition-base);
+}
+.hover-scale-subtle:hover {
+  transform: scale(1.02);
+}
+
+.hover-scale-pop {
+  transition: transform var(--transition-spring);
+}
+.hover-scale-pop:hover {
+  transform: scale(1.1);
+}
+
+/* Scale down on press — mimics a physical button */
+.hover-press {
+  transition: transform 0.15s ease, box-shadow var(--transition-fast);
+}
+.hover-press:hover {
+  transform: scale(0.97);
+  box-shadow: var(--shadow-sm);
+}
+.hover-press:active {
+  transform: scale(0.93);
+  box-shadow: none;
+}
+
+/* ---- Rotate Effects ---- */
+.hover-rotate-tilt {
+  transition: transform var(--transition-base);
+}
+.hover-rotate-tilt:hover {
+  transform: rotate(-3deg) scale(1.03);
+}
+
+.hover-rotate-tilt-right {
+  transition: transform var(--transition-base);
+}
+.hover-rotate-tilt-right:hover {
+  transform: rotate(3deg) scale(1.03);
+}
+
+.hover-rotate-spin {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hover-rotate-spin:hover {
+  transform: rotate(360deg);
+}
+
+.hover-rotate-flip {
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+.hover-rotate-flip:hover {
+  transform: rotateY(180deg);
+}
+
+/* ---- Lift Effect (rise + shadow deepen) ---- */
+.hover-lift {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.hover-lift-sm {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+.hover-lift-sm:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* ---- Shimmer Sweep (light sweep across surface) ---- */
+.hover-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.hover-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,0.25) 50%,
+    transparent 100%
+  );
+  transition: left 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.hover-shimmer:hover::before {
+  left: 130%;
+}
+
+/* ---- Neon Outline Pulse ---- */
+.hover-neon {
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
+  border: 2px solid transparent;
+}
+.hover-neon:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 8px rgba(197,165,90,0.4),
+              0 0 24px rgba(197,165,90,0.15),
+              inset 0 0 8px rgba(197,165,90,0.06);
+}
+
+.hover-neon-sage {
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
+  border: 2px solid transparent;
+}
+.hover-neon-sage:hover {
+  border-color: var(--color-sage);
+  box-shadow: 0 0 8px rgba(122,139,111,0.4),
+              0 0 24px rgba(122,139,111,0.15),
+              inset 0 0 8px rgba(122,139,111,0.06);
+}
+
+/* ---- Wobble / Shake ---- */
+@keyframes hoverWobble {
+  0%   { transform: rotate(0deg); }
+  15%  { transform: rotate(-4deg); }
+  30%  { transform: rotate(3deg); }
+  45%  { transform: rotate(-2deg); }
+  60%  { transform: rotate(1.5deg); }
+  75%  { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+.hover-wobble {
+  transition: transform var(--transition-base);
+}
+.hover-wobble:hover {
+  animation: hoverWobble 0.6s ease;
+}
+
+/* ---- Icon Slide (arrow/icon slides right on hover) ---- */
+.hover-icon-slide {
+  transition: gap var(--transition-base);
+}
+.hover-icon-slide:hover {
+  gap: var(--space-md);
+}
+.hover-icon-slide .btn-icon,
+.hover-icon-slide svg:last-child,
+.hover-icon-slide span:last-child {
+  transition: transform var(--transition-base);
+}
+.hover-icon-slide:hover .btn-icon,
+.hover-icon-slide:hover svg:last-child,
+.hover-icon-slide:hover span:last-child {
+  transform: translateX(4px);
+}
+
+/* ---- Composable: combine multiple effects ---- */
+/* Example: class="btn btn-primary hover-glow-gold hover-scale hover-shimmer" */
+
+/* ---- Reduced Motion: disable all hover transforms ---- */
+@media (prefers-reduced-motion: reduce) {
+  .hover-glow-gold:hover, .hover-glow-sage:hover, .hover-glow-white:hover,
+  .hover-glow-halo:hover,
+  .hover-scale:hover, .hover-scale-subtle:hover, .hover-scale-pop:hover,
+  .hover-press:hover, .hover-press:active,
+  .hover-rotate-tilt:hover, .hover-rotate-tilt-right:hover,
+  .hover-rotate-spin:hover, .hover-rotate-flip:hover,
+  .hover-lift:hover, .hover-lift-sm:hover,
+  .hover-wobble:hover {
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
 /* ---- Navigation ---- */
 .navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
@@ -334,6 +561,253 @@ p { margin-bottom: var(--space-md); color: var(--color-gray-700); }
 .reveal-delay-5 { transition-delay: 0.5s; }
 .reveal-delay-6 { transition-delay: 0.6s; }
 
+/* ============================================
+   FADE-UP ON SCROLL — Keyframe Animations
+   ============================================ */
+
+/* ---- Fade Up: Clean vertical rise ---- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Fade Up Blur: Rise with focus effect ---- */
+@keyframes fadeUpBlur {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* ---- Fade Up Scale: Rise with subtle zoom ---- */
+@keyframes fadeUpScale {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---- Fade Up Left: Diagonal from bottom-left ---- */
+@keyframes fadeUpLeft {
+  from {
+    opacity: 0;
+    transform: translate(-40px, 30px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* ---- Fade Up Right: Diagonal from bottom-right ---- */
+@keyframes fadeUpRight {
+  from {
+    opacity: 0;
+    transform: translate(40px, 30px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* ---- Fade-Up Utility Classes ---- */
+/* Base state: hidden until triggered */
+.fade-up,
+.fade-up-blur,
+.fade-up-scale,
+.fade-up-left,
+.fade-up-right {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+/* Triggered state: run animation */
+.fade-up.visible         { animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.fade-up-blur.visible    { animation: fadeUpBlur 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.fade-up-scale.visible   { animation: fadeUpScale 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.fade-up-left.visible    { animation: fadeUpLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.fade-up-right.visible   { animation: fadeUpRight 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* Speed modifiers */
+.fade-up-fast.visible,
+.fade-up-blur.fade-up-fast.visible,
+.fade-up-scale.fade-up-fast.visible  { animation-duration: 0.5s; }
+.fade-up-slow.visible,
+.fade-up-blur.fade-up-slow.visible,
+.fade-up-scale.fade-up-slow.visible  { animation-duration: 1.2s; }
+
+/* Stagger delays for child elements */
+.fade-stagger-1 { animation-delay: 0.08s !important; }
+.fade-stagger-2 { animation-delay: 0.16s !important; }
+.fade-stagger-3 { animation-delay: 0.24s !important; }
+.fade-stagger-4 { animation-delay: 0.32s !important; }
+.fade-stagger-5 { animation-delay: 0.40s !important; }
+.fade-stagger-6 { animation-delay: 0.48s !important; }
+.fade-stagger-7 { animation-delay: 0.56s !important; }
+.fade-stagger-8 { animation-delay: 0.64s !important; }
+
+/* ============================================
+   WORD-BY-WORD TEXT ANIMATION
+   ============================================ */
+
+/* Container: hides overflow during animation */
+.text-animate {
+  overflow: hidden;
+}
+
+/* Each word wrapper generated by JS */
+.word-animate {
+  display: inline-block;
+  opacity: 0;
+  will-change: opacity, transform, filter;
+  /* Preserve spaces between words */
+  margin-right: 0.28em;
+}
+
+/* ---- Style: Fade Up (default) ---- */
+@keyframes wordFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Style: Blur In ---- */
+@keyframes wordBlurIn {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* ---- Style: Slide Left ---- */
+@keyframes wordSlideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ---- Style: Scale In ---- */
+@keyframes wordScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---- Style: Drop In (with bounce) ---- */
+@keyframes wordDropIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(6px);
+  }
+  80% {
+    transform: translateY(-3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Style: Type Reveal (clip mask) ---- */
+@keyframes wordTypeReveal {
+  from {
+    opacity: 1;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Triggered state — JS adds .word-visible to each word */
+.word-animate.word-visible {
+  animation-fill-mode: forwards;
+}
+
+/* Style class mappings (JS reads data-text-style, CSS plays animation) */
+.text-animate--fade-up .word-animate.word-visible    { animation-name: wordFadeUp; }
+.text-animate--blur-in .word-animate.word-visible     { animation-name: wordBlurIn; }
+.text-animate--slide-left .word-animate.word-visible  { animation-name: wordSlideLeft; }
+.text-animate--scale-in .word-animate.word-visible    { animation-name: wordScaleIn; }
+.text-animate--drop-in .word-animate.word-visible     { animation-name: wordDropIn; }
+.text-animate--type-reveal .word-animate.word-visible { animation-name: wordTypeReveal; }
+
+/* Default style (when no modifier is set) */
+.text-animate .word-animate.word-visible {
+  animation-name: wordFadeUp;
+}
+
+/* Duration presets */
+.text-animate .word-animate.word-visible              { animation-duration: 0.5s; }
+.text-animate--slow .word-animate.word-visible        { animation-duration: 0.8s; }
+.text-animate--fast .word-animate.word-visible        { animation-duration: 0.3s; }
+
+/* Easing */
+.text-animate .word-animate.word-visible {
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+.text-animate--drop-in .word-animate.word-visible {
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Safety fallback: show text after 4s if JS fails */
+.word-animate {
+  animation: revealFallback 0s 4s forwards;
+}
+
+/* Reduced motion: show all words immediately */
+@media (prefers-reduced-motion: reduce) {
+  .word-animate {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+}
+
 /* ---- Safety Fallback: show content if JS hasn't initialized after 4s ---- */
 /* This ensures images/content aren't permanently hidden on mobile phones
    where IntersectionObserver may not fire correctly */
@@ -344,12 +818,159 @@ p { margin-bottom: var(--space-md); color: var(--color-gray-700); }
     filter: none;
   }
 }
-.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate, .reveal-blur {
+.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate, .reveal-blur,
+.fade-up, .fade-up-blur, .fade-up-scale, .fade-up-left, .fade-up-right {
   animation: revealFallback 0s 4s forwards;
 }
 
-/* ---- Parallax Utility ---- */
-.parallax-layer { will-change: transform; transition: transform 0.1s linear; }
+/* ============================================
+   PARALLAX BACKGROUNDS
+   ============================================ */
+
+/* ---- Pure CSS Parallax (GPU-accelerated, no JS) ---- */
+/* Wrap sections in .parallax-wrapper, use .parallax-bg inside */
+
+.parallax-wrapper {
+  position: relative;
+  overflow: hidden;
+  /* Creates a new perspective context */
+  perspective: 1px;
+  perspective-origin: center center;
+  height: auto;
+}
+
+/* Scrollable container approach (for full-page parallax) */
+.parallax-scroll-container {
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 8px;
+  perspective-origin: 50% 50%;
+}
+
+.parallax-scroll-container .parallax-bg {
+  position: absolute;
+  inset: -20% 0;
+  transform: translateZ(-4px) scale(1.5);
+}
+
+/* ---- Background Layer ---- */
+.parallax-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  will-change: transform;
+}
+
+/* Fixed attachment approach (simplest — works without JS) */
+.parallax-fixed {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Speed variants — controls how much the bg shifts on scroll (JS-driven) */
+.parallax-bg--slow   { --parallax-speed: 0.15; }
+.parallax-bg--medium { --parallax-speed: 0.3; }
+.parallax-bg--fast   { --parallax-speed: 0.5; }
+.parallax-bg--reverse { --parallax-speed: -0.2; } /* Moves opposite to scroll */
+
+/* ---- Overlay Tints ---- */
+.parallax-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.parallax-overlay--dark    { background: rgba(0, 0, 0, 0.45); }
+.parallax-overlay--darker  { background: rgba(0, 0, 0, 0.65); }
+.parallax-overlay--light   { background: rgba(255, 255, 255, 0.3); }
+.parallax-overlay--sage    { background: rgba(74, 90, 60, 0.55); }
+.parallax-overlay--gold    { background: linear-gradient(135deg, rgba(197,165,90,0.2) 0%, transparent 60%); }
+.parallax-overlay--gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.1) 40%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+/* ---- Parallax Content (sits above bg + overlay) ---- */
+.parallax-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Multi-Layer Depth Stack ---- */
+/* Use data-depth="0.1" to "0.9" for JS-driven layer speeds */
+.parallax-layer {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transition: transform 0.08s linear;
+  pointer-events: none;
+}
+
+/* ---- Parallax Section Presets ---- */
+/* Drop-in section with parallax bg, overlay, and content area */
+.parallax-section {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-5xl) 0;
+  color: var(--color-white);
+}
+
+.parallax-section .parallax-bg {
+  /* Extra height so we have room to shift */
+  top: -30%;
+  bottom: -30%;
+  height: 160%;
+}
+
+/* ---- Parallax Hero Variant ---- */
+.parallax-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--color-white);
+  text-align: center;
+}
+
+.parallax-hero .parallax-bg {
+  top: -20%;
+  bottom: -20%;
+  height: 140%;
+}
+
+/* ---- Zoom-on-Scroll Effect ---- */
+/* Subtle bg scale that increases as user scrolls past */
+.parallax-zoom .parallax-bg {
+  transition: transform 0.1s linear;
+  /* JS will update --parallax-scale */
+  transform: scale(var(--parallax-scale, 1));
+}
+
+/* Disable parallax on mobile (performance + iOS fixed-bg bug) */
+@media (max-width: 768px) {
+  .parallax-fixed {
+    background-attachment: scroll;
+  }
+  .parallax-section .parallax-bg,
+  .parallax-hero .parallax-bg {
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    transform: none !important;
+  }
+}
 
 /* ---- Button Ripple ---- */
 .btn-ripple { position: relative; overflow: hidden; }
@@ -370,7 +991,8 @@ p { margin-bottom: var(--space-md); color: var(--color-gray-700); }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate, .reveal-blur {
+  .reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate, .reveal-blur,
+  .fade-up, .fade-up-blur, .fade-up-scale, .fade-up-left, .fade-up-right {
     opacity: 1; transform: none; filter: none;
   }
 }
@@ -447,6 +1069,111 @@ p { margin-bottom: var(--space-md); color: var(--color-gray-700); }
 .leaf--fall { animation: leafFall linear forwards; }
 .leaf--float { animation: leafFloat ease-in-out infinite; }
 
+/* ============================================
+   FLOATING & BOUNCE EFFECTS
+   ============================================ */
+
+/* ---- Float: Gentle vertical hover ---- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+/* ---- Float X: Horizontal drift ---- */
+@keyframes floatX {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(10px); }
+}
+
+/* ---- Float Rotate: Hover with subtle tilt ---- */
+@keyframes floatRotate {
+  0%   { transform: translateY(0) rotate(0deg); }
+  25%  { transform: translateY(-8px) rotate(2deg); }
+  50%  { transform: translateY(-14px) rotate(0deg); }
+  75%  { transform: translateY(-8px) rotate(-2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* ---- Float Glow: Float + pulsing shadow ---- */
+@keyframes floatGlow {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 4px 16px rgba(197,165,90,0.15);
+  }
+  50% {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 36px rgba(197,165,90,0.35);
+  }
+}
+
+/* ---- Bounce: Classic elastic bounce ---- */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  20%      { transform: translateY(-18px); }
+  40%      { transform: translateY(0); }
+  60%      { transform: translateY(-8px); }
+  80%      { transform: translateY(0); }
+}
+
+/* ---- Bounce In: Entrance with overshoot ---- */
+@keyframes bounceIn {
+  0%   { opacity: 0; transform: scale(0.3); }
+  50%  { opacity: 1; transform: scale(1.08); }
+  70%  { transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ---- Bounce Pulse: Rhythmic scale pop ---- */
+@keyframes bouncePulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+
+/* ---- Bounce Elastic: Spring-like vertical bounce ---- */
+@keyframes bounceElastic {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-20px); }
+  50%  { transform: translateY(4px); }
+  65%  { transform: translateY(-10px); }
+  80%  { transform: translateY(2px); }
+  90%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+/* ---- Utility Classes ---- */
+.anim-float         { animation: float 3s ease-in-out infinite; }
+.anim-float-slow    { animation: float 5s ease-in-out infinite; }
+.anim-float-fast    { animation: float 2s ease-in-out infinite; }
+.anim-float-x       { animation: floatX 4s ease-in-out infinite; }
+.anim-float-rotate  { animation: floatRotate 4s ease-in-out infinite; }
+.anim-float-glow    { animation: floatGlow 3.5s ease-in-out infinite; }
+
+.anim-bounce        { animation: bounce 2s ease infinite; }
+.anim-bounce-in     { animation: bounceIn 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) both; }
+.anim-bounce-pulse  { animation: bouncePulse 2s ease-in-out infinite; }
+.anim-bounce-elastic { animation: bounceElastic 1.5s ease infinite; }
+
+/* Staggered animation delays */
+.anim-delay-100 { animation-delay: 0.1s; }
+.anim-delay-200 { animation-delay: 0.2s; }
+.anim-delay-300 { animation-delay: 0.3s; }
+.anim-delay-400 { animation-delay: 0.4s; }
+.anim-delay-500 { animation-delay: 0.5s; }
+.anim-delay-700 { animation-delay: 0.7s; }
+.anim-delay-1000 { animation-delay: 1s; }
+
+/* Hover-triggered variants */
+.hover-float:hover   { animation: float 2s ease-in-out infinite; }
+.hover-bounce:hover  { animation: bounce 1s ease; }
+.hover-pulse:hover   { animation: bouncePulse 0.6s ease; }
+
 @media (prefers-reduced-motion: reduce) {
   .floating-leaves-container { display: none; }
+  .anim-float, .anim-float-slow, .anim-float-fast,
+  .anim-float-x, .anim-float-rotate, .anim-float-glow,
+  .anim-bounce, .anim-bounce-in, .anim-bounce-pulse,
+  .anim-bounce-elastic,
+  .hover-float:hover, .hover-bounce:hover, .hover-pulse:hover {
+    animation: none !important;
+  }
 }

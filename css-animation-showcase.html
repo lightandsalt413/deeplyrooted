@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete CSS Animation Effects</title>
+  <style>
+    /* ========== RESET & BASE STYLES ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    section {
+      min-height: 100vh;
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-align: center;
+      background: linear-gradient(45deg, #6366f1, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* ========== FLOATING & BOUNCE KEYFRAMES ========== */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+    
+    .float {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-30px);
+      }
+      60% {
+        transform: translateY(-15px);
+      }
+    }
+    
+    .bounce {
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+    
+    .pulse {
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    /* ========== FADE-UP ANIMATION ========== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .fade-up:nth-child(1) { transition-delay: 0.1s; }
+    .fade-up:nth-child(2) { transition-delay: 0.2s; }
+    .fade-up:nth-child(3) { transition-delay: 0.3s; }
+    .fade-up:nth-child(4) { transition-delay: 0.4s; }
+    .fade-up:nth-child(5) { transition-delay: 0.5s; }
+    
+    /* ========== PARALLAX BACKGROUND ========== */
+    .parallax-section {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .parallax-bg {
+      position: absolute;
+      top: -10%;
+      left: 0;
+      width: 100%;
+      height: 120%;
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+      z-index: -1;
+    }
+    
+    .parallax-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+    
+    /* ========== BUTTON HOVER EFFECTS ========== */
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      width: 100%;
+      padding: 20px;
+    }
+    
+    /* Base Button Style */
+    button {
+      padding: 15px 35px;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    /* Glow Effect */
+    .btn-glow {
+      background: #6366f1;
+      box-shadow: 0 4px 15px 0 rgba(99, 102, 241, 0.3);
+    }
+    
+    .btn-glow:hover {
+      box-shadow: 0 0 30px 15px rgba(99, 102, 241, 0.5);
+      transform: translateY(-3px);
+    }
+    
+    /* Scale Effect */
+    .btn-scale {
+      background: #10b981;
+    }
+    
+    .btn-scale:hover {
+      transform: scale(1.15);
+    }
+    
+    .btn-scale:active {
+      transform: scale(0.95);
+    }
+    
+    /* Rotate Effect */
+    .btn-rotate {
+      background: #f59e0b;
+    }
+    
+    .btn-rotate:hover {
+      transform: rotate(-5deg) scale(1.1);
+    }
+    
+    /* Shine Effect */
+    .btn-shine {
+      background: linear-gradient(45deg, #ec4899, #8b5cf6);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-shine::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    .btn-shine:hover::before {
+      left: 100%;
+    }
+    
+    /* 3D Flip */
+    .btn-flip {
+      background: #ef4444;
+      transform-style: preserve-3d;
+    }
+    
+    .btn-flip:hover {
+      transform: rotateX(360deg);
+      transition: transform 0.6s;
+    }
+    
+    /* Slide Effect */
+    .btn-slide {
+      background: #06b6d4;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+    
+    .btn-slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #0891b2;
+      z-index: -1;
+      transition: left 0.3s ease;
+    }
+    
+    .btn-slide:hover::before {
+      left: 0;
+    }
+    
+    /* ========== TEXT ANIMATION ========== */
+    .text-animation {
+      display: inline-block;
+    }
+    
+    .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInWord 0.5s ease forwards;
+    }
+    
+    @keyframes fadeInWord {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Typing Effect */
+    .typing-text {
+      overflow: hidden;
+      border-right: 3px solid #6366f1;
+      white-space: nowrap;
+      margin: 20px auto;
+      animation: typing 3.5s steps(40) forwards, blink 0.75s step-end infinite;
+      max-width: fit-content;
+    }
+    
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    
+    /* ========== DEMO BOXES ========== */
+    .demo-box {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      padding: 40px;
+      border-radius: 16px;
+      margin: 15px;
+      min-width: 250px;
+      text-align: center;
+      font-size: 1.2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .demo-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1200px;
+    }
+    
+    /* ========== CARD GRID ========== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      width: 100%;
+      padding: 20px;
+    }
+    
+    .card {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* ========== SCROLL INDICATOR ========== */
+    .scroll-indicator {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      font-size: 2rem;
+      z-index: 100;
+    }
+    
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.8rem; }
+      .button-grid { grid-template-columns: 1fr; }
+      .demo-container { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section>
+    <h1 class="text-animation">Welcome to CSS Animation Showcase</h1>
+    <p class="typing-text">Creating beautiful web experiences...</p>
+    <div class="scroll-indicator">👇</div>
+  </section>
+
+  <!-- ========== FLOATING & BOUNCE EFFECTS ========== -->
+  <section>
+    <h2>Floating & Bounce Effects</h2>
+    <div class="demo-container">
+      <div class="demo-box float">
+        <p>🎈 Floating Effect</p>
+      </div>
+      <div class="demo-box bounce">
+        <p>⚡ Bounce Effect</p>
+      </div>
+      <div class="demo-box pulse">
+        <p>💓 Pulse Effect</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BUTTON HOVER EFFECTS ========== -->
+  <section>
+    <h2>Button Hover Effects</h2>
+    <div class="button-grid">
+      <button class="btn-glow">Glow Effect</button>
+      <button class="btn-scale">Scale Effect</button>
+      <button class="btn-rotate">Rotate Effect</button>
+      <button class="btn-shine">Shine Effect</button>
+      <button class="btn-flip">Flip Effect</button>
+      <button class="btn-slide">Slide Effect</button>
+    </div>
+  </section>
+
+  <!-- ========== FADE-UP ON SCROLL ========== -->
+  <section>
+    <h2>Fade-Up Animation on Scroll</h2>
+    <div class="card-grid">
+      <div class="card fade-up">
+        <h3>Card 1</h3>
+        <p>This card fades up when you scroll to it</p>
+      </div>
+      <div class="card fade-up">
+        <h3>Card 2</h3>
+        <p>Each card has a staggered delay</p>
+      </div>
+      <div class="card fade-up">
+        <h3>Card 3</h3>
+        <p>Creating a smooth cascade effect</p>
+      </div>
+      <div class="card fade-up">
+        <h3>Card 4</h3>
+        <p>Scroll down to see more!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PARALLAX SECTION ========== -->
+  <div class="parallax-section">
+    <div class="parallax-bg" data-speed="0.5" 
+         style="background-image: linear-gradient(45deg, #667eea 0%, #764ba2 100%);">
+    </div>
+    <div class="parallax-content">
+      <h2 style="color: white; -webkit-text-fill-color: white;">Parallax Background</h2>
+      <p style="font-size: 1.2rem;">Scroll to see the parallax effect in action</p>
+    </div>
+  </div>
+
+  <!-- ========== MORE ANIMATIONS ========== -->
+  <section>
+    <h2 class="text-animation">Text Animates Word by Word</h2>
+    <div class="demo-container">
+      <div class="demo-box float">
+        <p>🚀 Hover over buttons above</p>
+      </div>
+      <div class="demo-box bounce">
+        <p>✨ Scroll to see fade effects</p>
+      </div>
+      <div class="demo-box pulse">
+        <p>🎨 All animations are smooth</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <script>
+    // ========== FADE-UP ON SCROLL ==========
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach(el => {
+      observer.observe(el);
+    });
+
+    // ========== PARALLAX EFFECT ==========
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.pageYOffset;
+          const parallaxElements = document.querySelectorAll('.parallax-bg');
+          
+          parallaxElements.forEach(el => {
+            const speed = parseFloat(el.dataset.speed) || 0.5;
+            const yPos = -(scrolled * speed);
+            el.style.transform = `translateY(${yPos}px)`;
+          });
+          
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // ========== TEXT ANIMATION WORD BY WORD ==========
+    function animateText(element) {
+      const text = element.textContent;
+      const words = text.split(' ');
+      element.innerHTML = '';
+      
+      words.forEach((word, index) => {
+        const span = document.createElement('span');
+        span.className = 'word';
+        span.textContent = word + ' ';
+        span.style.animationDelay = `${index * 0.1}s`;
+        element.appendChild(span);
+      });
+    }
+
+    document.querySelectorAll('.text-animation').forEach(animateText);
+
+    // ========== HIDE SCROLL INDICATOR AFTER SCROLL ==========
+    window.addEventListener('scroll', () => {
+      const indicator = document.querySelector('.scroll-indicator');
+      if (window.pageYOffset > 100) {
+        indicator.style.opacity = '0';
+      } else {
+        indicator.style.opacity = '1';
+      }
+    });
+
+    // ========== CONSOLE MESSAGE ==========
+    console.log('🎨 All animations loaded successfully!');
+    console.log('✨ Customize the timing and effects in the CSS section');
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation Effects Demo — Deeply Rooted Design System</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    /* Demo-only styles */
+    .demo-section { padding: 5rem 0; border-bottom: 1px solid var(--color-gray-200); }
+    .demo-section:nth-child(even) { background: var(--color-cream); }
+    .demo-label {
+      font-family: var(--font-body); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--color-gold);
+      margin-bottom: 0.5rem;
+    }
+    .demo-title { margin-bottom: 0.5rem; }
+    .demo-desc { font-size: 0.95rem; color: var(--color-gray-500); margin-bottom: 2.5rem; max-width: 600px; }
+    .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+    .demo-box {
+      background: var(--color-white); border-radius: var(--radius-lg); padding: 2rem 1.5rem;
+      text-align: center; box-shadow: var(--shadow-md); font-weight: 600; font-size: 0.9rem;
+      color: var(--color-charcoal);
+    }
+    .demo-box-dark {
+      background: var(--color-charcoal); color: var(--color-white); border-radius: var(--radius-lg);
+      padding: 2rem 1.5rem; text-align: center; box-shadow: var(--shadow-md); font-weight: 600; font-size: 0.9rem;
+    }
+    .demo-box small { display: block; margin-top: 0.5rem; font-weight: 400; font-size: 0.75rem; color: var(--color-gray-500); }
+    .demo-box-dark small { color: rgba(255,255,255,0.5); }
+    .demo-btn-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+    .demo-spacer { height: 60vh; display: flex; align-items: center; justify-content: center; }
+    .demo-spacer p { font-size: 1.2rem; color: var(--color-gray-300); font-style: italic; }
+
+    /* Hero for demo */
+    .demo-hero {
+      min-height: 80vh; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--color-sage-dark) 0%, var(--color-olive) 50%, #2d3a25 100%);
+      color: var(--color-white); text-align: center; position: relative; overflow: hidden;
+    }
+    .demo-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 70%, rgba(197,165,90,0.2) 0%, transparent 60%);
+    }
+    .demo-hero-content { position: relative; z-index: 1; max-width: 800px; padding: 2rem; }
+    .demo-hero h1 { color: var(--color-white); font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1rem; }
+    .demo-hero h1 em { color: var(--color-gold); font-style: normal; }
+    .demo-hero p { color: rgba(255,255,255,0.8); font-size: 1.15rem; margin-bottom: 2rem; }
+    .demo-hero .sparkle { position: absolute; color: var(--color-gold); font-size: 1.2rem; opacity: 0.6; }
+
+    .noscript-fallback .word-animate, .noscript-fallback .fade-up,
+    .noscript-fallback .fade-up-blur, .noscript-fallback .fade-up-scale {
+      opacity: 1 !important; transform: none !important; filter: none !important; animation: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section class="demo-hero">
+    <div class="sparkle anim-float" style="top:15%;left:10%">✦</div>
+    <div class="sparkle anim-float-slow anim-delay-200" style="top:25%;right:15%">✧</div>
+    <div class="sparkle anim-float anim-delay-400" style="bottom:30%;left:20%">✦</div>
+    <div class="sparkle anim-float-slow anim-delay-300" style="top:60%;right:10%">✧</div>
+    <div class="sparkle anim-float anim-delay-500" style="bottom:15%;right:25%">✦</div>
+
+    <div class="demo-hero-content">
+      <p class="subtitle" style="color: var(--color-gold-light);">Animation Effects Demo</p>
+      <h1 class="text-animate" data-text-style="blur-in" data-text-delay="100" data-text-autoplay>
+        Every Effect <em>Built</em> in One Page
+      </h1>
+      <p class="text-animate" data-text-style="fade-up" data-text-delay="50" data-text-autoplay>
+        Float, bounce, fade-up on scroll, parallax backgrounds, hover glow, and word-by-word text — all live.
+      </p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="#float" class="btn btn-primary hover-glow-gold hover-shimmer">Explore Effects ↓</a>
+        <a href="#word-by-word" class="btn btn-secondary hover-glow-white hover-scale-subtle">Word Animation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FLOAT & BOUNCE ═══════════════════ -->
+  <section class="demo-section" id="float">
+    <div class="container">
+      <p class="demo-label">01 — Keyframes</p>
+      <h2 class="demo-title">Float & Bounce Effects</h2>
+      <p class="demo-desc">Infinite motion animations. Add a class, get movement.</p>
+      <div class="demo-grid">
+        <div class="demo-box anim-float">Float<small>.anim-float</small></div>
+        <div class="demo-box anim-float-slow">Float Slow<small>.anim-float-slow</small></div>
+        <div class="demo-box anim-float-x">Float X<small>.anim-float-x</small></div>
+        <div class="demo-box anim-float-rotate">Float Rotate<small>.anim-float-rotate</small></div>
+        <div class="demo-box anim-float-glow">Float Glow<small>.anim-float-glow</small></div>
+        <div class="demo-box anim-bounce">Bounce<small>.anim-bounce</small></div>
+        <div class="demo-box anim-bounce-pulse">Bounce Pulse<small>.anim-bounce-pulse</small></div>
+        <div class="demo-box anim-bounce-elastic">Bounce Elastic<small>.anim-bounce-elastic</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FADE-UP ON SCROLL ═══════════════════ -->
+  <div class="demo-spacer"><p>↓ Scroll down to trigger fade-up animations ↓</p></div>
+
+  <section class="demo-section" id="fade-up">
+    <div class="container">
+      <p class="demo-label fade-up">02 — Scroll Animations</p>
+      <h2 class="demo-title fade-up">Fade-Up on Scroll</h2>
+      <p class="demo-desc fade-up">Elements animate in as they enter the viewport.</p>
+      <div class="demo-grid">
+        <div class="demo-box fade-up">Fade Up<small>.fade-up</small></div>
+        <div class="demo-box fade-up-blur fade-stagger-2">Fade Up Blur<small>.fade-up-blur</small></div>
+        <div class="demo-box fade-up-scale fade-stagger-3">Fade Up Scale<small>.fade-up-scale</small></div>
+        <div class="demo-box fade-up-left fade-stagger-4">Fade Up Left<small>.fade-up-left</small></div>
+        <div class="demo-box fade-up-right fade-stagger-5">Fade Up Right<small>.fade-up-right</small></div>
+        <div class="demo-box fade-up fade-stagger-6">Staggered 6<small>.fade-stagger-6</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ HOVER EFFECTS ═══════════════════ -->
+  <section class="demo-section" id="hover">
+    <div class="container">
+      <p class="demo-label fade-up">03 — Hover Effects</p>
+      <h2 class="demo-title fade-up">Glow · Scale · Rotate</h2>
+      <p class="demo-desc fade-up">Hover over each element to see the effect in action.</p>
+
+      <h4 style="margin-bottom:1rem; color:var(--color-sage-dark);">🔆 Glow</h4>
+      <div class="demo-btn-row fade-up">
+        <button class="btn btn-primary hover-glow-gold">Glow Gold</button>
+        <button class="btn btn-outline hover-glow-sage">Glow Sage</button>
+        <button class="btn btn-dark hover-glow-white">Glow White</button>
+        <button class="btn btn-primary hover-glow-halo">Glow Halo</button>
+      </div>
+
+      <h4 style="margin-bottom:1rem; color:var(--color-sage-dark);">📐 Scale</h4>
+      <div class="demo-btn-row fade-up">
+        <button class="btn btn-primary hover-scale">Scale 1.05×</button>
+        <button class="btn btn-outline hover-scale-subtle">Scale Subtle</button>
+        <button class="btn btn-dark hover-scale-pop">Scale Pop</button>
+        <button class="btn btn-primary hover-press">Press Down</button>
+      </div>
+
+      <h4 style="margin-bottom:1rem; color:var(--color-sage-dark);">🔄 Rotate</h4>
+      <div class="demo-btn-row fade-up">
+        <button class="btn btn-primary hover-rotate-tilt">Tilt Left</button>
+        <button class="btn btn-outline hover-rotate-tilt-right">Tilt Right</button>
+        <button class="btn btn-dark hover-rotate-spin">Spin 360°</button>
+        <button class="btn btn-primary hover-rotate-flip">3D Flip</button>
+      </div>
+
+      <h4 style="margin-bottom:1rem; color:var(--color-sage-dark);">✨ Bonus</h4>
+      <div class="demo-btn-row fade-up">
+        <button class="btn btn-primary hover-lift">Lift + Shadow</button>
+        <button class="btn btn-primary hover-shimmer">Shimmer Sweep</button>
+        <button class="btn btn-outline hover-neon">Neon Gold</button>
+        <button class="btn btn-outline hover-neon-sage">Neon Sage</button>
+        <button class="btn btn-dark hover-wobble">Wobble</button>
+      </div>
+
+      <h4 style="margin-bottom:1rem; color:var(--color-sage-dark);">🧩 Composable (stacked)</h4>
+      <div class="demo-btn-row fade-up">
+        <button class="btn btn-primary hover-glow-gold hover-scale hover-shimmer">Glow + Scale + Shimmer</button>
+        <button class="btn btn-dark hover-lift hover-neon">Lift + Neon</button>
+      </div>
+
+      <h4 style="margin: 2rem 0 1rem; color:var(--color-sage-dark);">Cards with Hover</h4>
+      <div class="demo-grid fade-up">
+        <div class="demo-box hover-lift hover-glow-halo" style="cursor:pointer;">Lift + Halo<small>Hover me</small></div>
+        <div class="demo-box hover-scale hover-shimmer" style="cursor:pointer;">Scale + Shimmer<small>Hover me</small></div>
+        <div class="demo-box hover-rotate-tilt hover-glow-sage" style="cursor:pointer;">Tilt + Glow<small>Hover me</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PARALLAX BACKGROUND ═══════════════════ -->
+  <section class="parallax-section" id="parallax" style="min-height:50vh; display:flex; align-items:center;">
+    <div class="parallax-bg parallax-bg--medium" style="background: linear-gradient(135deg, var(--color-sage-dark), var(--color-olive)); top:-30%; bottom:-30%; height:160%;"></div>
+    <div class="parallax-overlay parallax-overlay--gold"></div>
+    <div class="parallax-content container" style="text-align:center;">
+      <p class="demo-label fade-up" style="color: var(--color-gold-light);">04 — Parallax</p>
+      <h2 class="fade-up" style="color:white; margin-bottom:1rem;">Parallax Background</h2>
+      <p class="fade-up" style="color:rgba(255,255,255,0.8); max-width:500px; margin:0 auto;">This background shifts at a different rate than the page scroll, creating a depth effect. Uses <code style="background:rgba(255,255,255,0.15); padding:0.2em 0.5em; border-radius:4px;">.parallax-section</code></p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ WORD-BY-WORD ═══════════════════ -->
+  <div class="demo-spacer"><p>↓ Scroll to see word-by-word animations ↓</p></div>
+
+  <section class="demo-section" id="word-by-word">
+    <div class="container">
+      <p class="demo-label fade-up">05 — Text Animation</p>
+      <h2 class="demo-title fade-up">Word-by-Word on Scroll</h2>
+      <p class="demo-desc fade-up">Each word animates individually as the element enters the viewport.</p>
+
+      <div style="margin-bottom:3rem;">
+        <p class="demo-label">Fade Up (default)</p>
+        <h2 class="text-animate" data-text-style="fade-up" data-text-delay="80" style="margin-bottom:2rem;">
+          Professional Hair Botox Treatments
+        </h2>
+      </div>
+
+      <div style="margin-bottom:3rem;">
+        <p class="demo-label">Blur In</p>
+        <h2 class="text-animate" data-text-style="blur-in" data-text-delay="100" style="margin-bottom:2rem;">
+          Rooted in Nature and Science
+        </h2>
+      </div>
+
+      <div style="margin-bottom:3rem;">
+        <p class="demo-label">Scale In</p>
+        <h2 class="text-animate" data-text-style="scale-in" data-text-delay="90" style="margin-bottom:2rem;">
+          Healthy Scalp Beautiful Hair
+        </h2>
+      </div>
+
+      <div style="margin-bottom:3rem;">
+        <p class="demo-label">Drop In (bounce)</p>
+        <h2 class="text-animate" data-text-style="drop-in" data-text-delay="110" style="margin-bottom:2rem;">
+          Your Best Hair Starts Here
+        </h2>
+      </div>
+
+      <div style="margin-bottom:3rem;">
+        <p class="demo-label">Slide Left</p>
+        <h2 class="text-animate" data-text-style="slide-left" data-text-delay="70" style="margin-bottom:2rem;">
+          Salon Smooth Every Single Day
+        </h2>
+      </div>
+
+      <div>
+        <p class="demo-label">Type Reveal</p>
+        <h2 class="text-animate" data-text-style="type-reveal" data-text-delay="120">
+          Formulated With Love and Care
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer spacer -->
+  <div style="padding:4rem 0; text-align:center; background:var(--color-black); color:rgba(255,255,255,0.4);">
+    <p style="margin:0;">Animation Effects Demo — Deeply Rooted Design System</p>
+  </div>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

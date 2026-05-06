@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Digital Planner</title>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        :root {
+            --primary: #00f2ff;
+            --secondary: #7000ff;
+            --bg: #0a0a0c;
+            --card-bg: #16161a;
+            --text: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* 1. Parallax Background Code */
+        .parallax-wrapper {
+            background-image: url('https://images.unsplash.com/photo-1464802686167-b939a6910659?auto=format&fit=crop&q=80&w=1920');
+            height: 400px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        /* 2. CSS Keyframes for Floating/Bounce */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-title {
+            animation: float 4s ease-in-out infinite;
+            text-shadow: 0 0 20px var(--primary);
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: -50px auto 50px;
+            padding: 20px;
+        }
+
+        /* 3. Hover Effects: Glow, Scale, Rotate */
+        .planner-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--secondary);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .planner-card:hover {
+            transform: scale(1.03) rotate(1deg);
+            box-shadow: 0 0 30px rgba(112, 0, 255, 0.4);
+            border-left: 5px solid var(--primary);
+        }
+
+        .btn-action {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+        .btn-action:hover {
+            background: var(--primary);
+            color: var(--bg);
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        /* 4. Text Animation Styling */
+        .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .word.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="parallax-wrapper">
+        <h1 class="floating-title">Daily Planner</h1>
+    </div>
+
+    <div class="container">
+        <!-- Fade-up Section using ScrollReveal -->
+        <section class="planner-card fade-up">
+            <h2 id="animatedText">Ang Iyong Plano Para Sa Araw Na Ito</h2>
+            <ul class="task-list">
+                <li>✅ Review Social Media Analytics</li>
+                <li>✅ Content Shooting for Vlog</li>
+                <li>✅ Meeting with Brand Partners</li>
+            </ul>
+            <button class="btn-action">Add New Task</button>
+        </section>
+
+        <section class="planner-card fade-up">
+            <h2>Social Media Goals</h2>
+            <p>I-track ang iyong growth at engagement rate dito.</p>
+            <div style="background: #222; height: 10px; border-radius: 5px; margin-top: 10px;">
+                <div style="background: var(--primary); width: 75%; height: 100%; border-radius: 5px; box-shadow: 0 0 10px var(--primary);"></div>
+            </div>
+            <button class="btn-action">Update Stats</button>
+        </section>
+    </div>
+
+    <script>
+        // 5. Animate Text Word by Word
+        const textElement = document.getElementById('animatedText');
+        const words = textElement.innerText.split(' ');
+        textElement.innerHTML = '';
+        
+        words.forEach((word, index) => {
+            const span = document.createElement('span');
+            span.innerText = word + ' ';
+            span.classList.add('word');
+            textElement.appendChild(span);
+            
+            setTimeout(() => {
+                span.classList.add('animate');
+            }, index * 200); // 200ms delay bawat salita
+        });
+
+        // 6. Fade-up animations on scroll
+        ScrollReveal().reveal('.fade-up', {
+            delay: 300,
+            distance: '50px',
+            origin: 'bottom',
+            duration: 1000,
+            easing: 'ease-in-out',
+            reset: true
+        });
+    </script>
+
+</body>
+</html>

@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="styles/main.css?v=20260504c">
+  <link rel="stylesheet" href="styles/pages/home.css?v=20260504c">
   <style>
     .nav-logo-img{max-height:32px!important}
 
@@ -120,57 +121,91 @@
     <div class="sh-line"></div>
   </section>
 
-  <!-- PRODUCTS -->
-  <section class="sf">
-    <p class="sf-label">✦ Shop Our Treatments ✦</p>
-    <h2>Professional Hair Botox</h2>
-
-    <div class="sg">
-      <!-- Cynty -->
-      <div class="sc">
-        <div class="sc-img">
-          <span class="sc-tag">Sale</span>
-          <div class="sc-glow"></div>
-          <img src="assets/images/product-cynty-raw.png" alt="Hair Botox Cynty">
-        </div>
-        <div class="sc-body">
-          <h3>Hair Botox "Cynty"</h3>
-          <p class="sc-desc">Bestselling formula — curl enhancing, anti-frizz. Lasts up to 3 months. 1000ml.</p>
-          <div class="sc-price">
-            <strong>$50.00</strong><del>$75.00</del><span class="sc-save">-33%</span>
-          </div>
-          <a href="https://hair-botox-deeply-rooted.myshopify.com/products/hair-botox-cynty" target="_blank" class="sc-btn">Shop Now →</a>
-        </div>
+  <!-- ═══════════════════════════════════════════
+       PRODUCT LINEUP — Complete Collection
+  ═══════════════════════════════════════════ -->
+  <section class="product-lineup section" id="product-lineup">
+    <div class="container">
+      <div class="section-header">
+        <p class="subtitle">Our Complete Collection</p>
+        <h2>The <em>Deeply Rooted</em> Product Line</h2>
+        <p>Professional-grade Hair Botox treatments and scalp care — formulated with love, rooted in Jeremiah 17:8.</p>
       </div>
 
-      <!-- Michelle -->
-      <div class="sc">
-        <div class="sc-img">
-          <span class="sc-tag">Sale</span>
-          <div class="sc-glow"></div>
-          <img src="assets/images/product-michelle-raw.png" alt="Hair Botox Michelle">
-        </div>
-        <div class="sc-body">
-          <h3>Hair Botox "Michelle"</h3>
-          <p class="sc-desc">Maximum strength — deep repair, 60% straighter hair. Lasts up to 5 months. 1000ml.</p>
-          <div class="sc-price">
-            <strong>$50.00</strong><del>$75.00</del><span class="sc-save">-33%</span>
-          </div>
-          <a href="https://hair-botox-deeply-rooted.myshopify.com/products/untitled-apr2_02-59" target="_blank" class="sc-btn">Shop Now →</a>
-        </div>
+      <!-- Product Category Label -->
+      <div class="lineup-category reveal">
+        <div class="lineup-category-line"></div>
+        <span class="lineup-category-label">Hair Botox Treatments</span>
+        <div class="lineup-category-line"></div>
       </div>
 
-      <!-- Scalp -->
-      <div class="sc">
-        <div class="sc-img">
-          <div class="sc-glow"></div>
-          <img src="assets/images/product-scalp-treatment.png" alt="Scalp Renewal Treatment">
+      <!-- Hair Botox Products -->
+      <div class="lineup-grid reveal">
+        <!-- Cynty -->
+        <div class="lineup-card" data-product="cynty">
+          <div class="lineup-card-badge lineup-badge-gold">Bestseller</div>
+          <div class="lineup-card-image">
+            <div class="lineup-card-glow"></div>
+            <img src="assets/images/product-cynty-raw.png" alt="Cynty Hair Botox Treatment — lasts 3 months" loading="lazy">
+          </div>
+          <div class="lineup-card-content">
+            <h3>Cynty</h3>
+            <div class="lineup-duration">
+              <div class="lineup-duration-bar" style="--duration-width: 50%"></div>
+              <span class="lineup-duration-text">Lasts up to <strong>3 months</strong></span>
+            </div>
+            <ul class="lineup-features">
+              <li>Frizz solution</li>
+              <li>Keratin & collagen infusion</li>
+              <li>Silky, manageable hair</li>
+            </ul>
+            <a href="https://hair-botox-deeply-rooted.myshopify.com" target="_blank" class="btn btn-primary btn-ripple lineup-btn">SHOP NOW</a>
+          </div>
         </div>
-        <div class="sc-body">
-          <h3>Scalp Renewal Treatment</h3>
-          <p class="sc-desc">Promotes hair growth, strengthens roots, detoxifies scalp. 4 oz (118 mL).</p>
-          <div class="sc-price"><strong>$35.00</strong></div>
-          <a href="https://hair-botox-deeply-rooted.myshopify.com/products/deeply-rooted-scalp-treatment" target="_blank" class="sc-btn">Shop Now →</a>
+
+        <!-- Michelle -->
+        <div class="lineup-card" data-product="michelle">
+          <div class="lineup-card-badge lineup-badge-sage">Pro Choice</div>
+          <div class="lineup-card-image">
+            <div class="lineup-card-glow"></div>
+            <img src="assets/images/product-michelle-raw.png" alt="Michelle Hair Botox Treatment — lasts 5 months" loading="lazy">
+          </div>
+          <div class="lineup-card-content">
+            <h3>Michelle</h3>
+            <div class="lineup-duration">
+              <div class="lineup-duration-bar" style="--duration-width: 75%"></div>
+              <span class="lineup-duration-text">Lasts up to <strong>5 months</strong></span>
+            </div>
+            <ul class="lineup-features">
+              <li>60% straighter hair</li>
+              <li>Frizz solution</li>
+              <li>Hair restoration</li>
+            </ul>
+            <a href="https://hair-botox-deeply-rooted.myshopify.com" target="_blank" class="btn btn-primary btn-ripple lineup-btn">SHOP NOW</a>
+          </div>
+        </div>
+
+        <!-- Scalp Renewal Treatment -->
+        <div class="lineup-card" data-product="scalp">
+          <div class="lineup-card-badge lineup-badge-sage">Scalp Care</div>
+          <div class="lineup-card-image">
+            <div class="lineup-card-glow"></div>
+            <img src="assets/images/product-scalp-treatment.png" alt="Deeply Rooted Scalp Renewal Treatment — 4 oz Salon-Grade Formula" loading="lazy">
+          </div>
+          <div class="lineup-card-content">
+            <h3>Scalp Renewal Treatment</h3>
+            <div class="lineup-duration">
+              <div class="lineup-duration-bar" style="--duration-width: 60%"></div>
+              <span class="lineup-duration-text"><strong>Salon-Grade</strong> Formula</span>
+            </div>
+            <ul class="lineup-features">
+              <li>Promotes hair growth</li>
+              <li>Strengthens roots</li>
+              <li>Detoxifies scalp</li>
+              <li>4 oz (118 mL) — For everyone</li>
+            </ul>
+            <a href="https://hair-botox-deeply-rooted.myshopify.com" target="_blank" class="btn btn-primary btn-ripple lineup-btn">SHOP NOW</a>
+          </div>
         </div>
       </div>
     </div>

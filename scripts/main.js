@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
     init3DTilt();
     initFloatingLeaves();
+    initBackgroundParallax();
+    initTextAnimate();
   }
 
 
@@ -67,7 +69,10 @@ function initMobileMenu() {
 
 /* ---- Scroll Reveal (One-Way — Mobile-Safe) ---- */
 function initScrollReveal() {
-  const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate, .reveal-blur');
+  const reveals = document.querySelectorAll(
+    '.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate, .reveal-blur, ' +
+    '.fade-up, .fade-up-blur, .fade-up-scale, .fade-up-left, .fade-up-right'
+  );
   if (!reveals.length) return;
 
   // Cancel the CSS fallback animation since JS is running
@@ -692,6 +697,207 @@ function initEduHeroParallax() {
       ticking = true;
     }
   }, { passive: true });
+}
+
+/* ---- Background Parallax Engine ---- */
+function initBackgroundParallax() {
+  const sections = document.querySelectorAll('.parallax-section, .parallax-hero, .parallax-zoom');
+  const layers = document.querySelectorAll('.parallax-layer[data-depth]');
+  if (!sections.length && !layers.length) return;
+
+  // Track which sections are currently in viewport
+  const visibleSections = new Set();
+
+  // Use IntersectionObserver to only animate visible sections
+  if ('IntersectionObserver' in window) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          visibleSections.add(entry.target);
+        } else {
+          visibleSections.delete(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '100px 0px',
+      threshold: 0
+    });
+
+    sections.forEach(section => sectionObserver.observe(section));
+  } else {
+    // Fallback: treat all sections as visible
+    sections.forEach(section => visibleSections.add(section));
+  }
+
+  let ticking = false;
+
+  function updateParallax() {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+
+    // Update parallax backgrounds
+    visibleSections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top + scrollY;
+      const sectionHeight = rect.height;
+
+      // How far through the section we've scrolled (-1 to 1)
+      const progress = (scrollY + windowHeight - sectionTop) / (windowHeight + sectionHeight);
+      const clamped = Math.max(0, Math.min(1, progress));
+      // Center around 0 (-0.5 to 0.5)
+      const centered = clamped - 0.5;
+
+      const bg = section.querySelector('.parallax-bg');
+      if (bg) {
+        // Read speed from CSS custom property or default
+        const speed = parseFloat(
+          getComputedStyle(bg).getPropertyValue('--parallax-speed')
+        ) || 0.3;
+
+        const translateY = centered * sectionHeight * speed;
+        bg.style.transform = `translate3d(0, ${translateY}px, 0)`;
+      }
+
+      // Zoom-on-scroll variant
+      if (section.classList.contains('parallax-zoom')) {
+        const zoomBg = section.querySelector('.parallax-bg');
+        if (zoomBg) {
+          const scale = 1 + (clamped * 0.15); // Grows 1.0 → 1.15
+          zoomBg.style.transform = `translate3d(0, 0, 0) scale(${scale})`;
+        }
+      }
+    });
+
+    // Update depth layers (for multi-layer parallax)
+    layers.forEach(layer => {
+      const depth = parseFloat(layer.getAttribute('data-depth')) || 0.2;
+      const parent = layer.closest('.parallax-section, .parallax-hero, .parallax-wrapper');
+      if (!parent) return;
+
+      const rect = parent.getBoundingClientRect();
+      const parentTop = rect.top + scrollY;
+      const progress = (scrollY + windowHeight - parentTop) / (windowHeight + rect.height);
+      const centered = Math.max(-0.5, Math.min(0.5, progress - 0.5));
+
+      const moveY = centered * rect.height * depth;
+      const moveX = centered * 20 * depth; // Subtle horizontal drift
+      layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial update
+  requestAnimationFrame(updateParallax);
+}
+
+/* ---- Word-by-Word Text Animation ---- */
+function initTextAnimate() {
+  const containers = document.querySelectorAll('.text-animate');
+  if (!containers.length) return;
+
+  containers.forEach(container => {
+    // Read config from data attributes
+    const style = container.getAttribute('data-text-style') || 'fade-up';
+    const staggerMs = parseInt(container.getAttribute('data-text-delay'), 10) || 80;
+    const autoplay = container.hasAttribute('data-text-autoplay');
+
+    // Add style modifier class
+    container.classList.add(`text-animate--${style}`);
+
+    // Split text nodes into word spans (preserves child elements like <em>, <strong>)
+    splitIntoWords(container);
+
+    // Collect all word spans
+    const words = container.querySelectorAll('.word-animate');
+    if (!words.length) return;
+
+    // Cancel CSS fallback since JS is active
+    words.forEach(w => { w.style.animationName = 'none'; });
+
+    // Set stagger delay on each word
+    words.forEach((word, i) => {
+      word.style.animationDelay = `${i * staggerMs}ms`;
+    });
+
+    // Trigger function
+    function triggerWords() {
+      words.forEach(word => {
+        word.style.animationName = ''; // Re-enable CSS animation
+        word.classList.add('word-visible');
+      });
+    }
+
+    // Auto-play immediately (for hero headlines above the fold)
+    if (autoplay) {
+      // Small delay so the page has time to render
+      setTimeout(triggerWords, 200);
+      return;
+    }
+
+    // Otherwise, trigger on scroll via IntersectionObserver
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            triggerWords();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      observer.observe(container);
+    } else {
+      // Fallback: show immediately
+      triggerWords();
+    }
+  });
+}
+
+/**
+ * Splits text nodes inside an element into individual <span class="word-animate"> wrappers.
+ * Preserves existing child elements (em, strong, span, a, etc.) by processing
+ * only direct text nodes recursively.
+ */
+function splitIntoWords(el) {
+  const childNodes = Array.from(el.childNodes);
+
+  childNodes.forEach(node => {
+    // Text node — split into words
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent;
+      if (!text.trim()) return; // Skip whitespace-only nodes
+
+      const fragment = document.createDocumentFragment();
+      const words = text.split(/\s+/).filter(w => w.length > 0);
+
+      words.forEach(word => {
+        const span = document.createElement('span');
+        span.className = 'word-animate';
+        span.textContent = word;
+        fragment.appendChild(span);
+      });
+
+      node.parentNode.replaceChild(fragment, node);
+    }
+    // Element node (em, strong, a, span, etc.) — recurse into it
+    else if (node.nodeType === Node.ELEMENT_NODE) {
+      // Wrap the element's content but keep the element itself
+      splitIntoWords(node);
+      // Make the element itself inline-block so word layout works
+      node.style.display = 'inline';
+    }
+  });
 }
 
 /* ---- Floating Leaves ---- */
